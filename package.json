@@ -1,0 +1,12 @@
+{
+  "name": "curso-testes",
+  "version": "1.0.0",
+  "description": "Curso de Testes Automatizados para APIs (Alura)",
+  "license": "ISC",
+  "author": "Thiago R. V. Martins",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --test"
+  }
+}
