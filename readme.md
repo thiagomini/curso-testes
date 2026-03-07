@@ -98,7 +98,7 @@ erDiagram
 
 ### Vendas
 
-- POST /vendas → registra uma nova venda
+- POST /vendas → registra uma nova venda. Quando uma venda é feita, um email é enviado à editora.
 
 ```json
 {
