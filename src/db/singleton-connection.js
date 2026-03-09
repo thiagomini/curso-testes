@@ -1,4 +1,4 @@
-import { databaseConfig } from '../config/database.config.js';
+import { databaseConfig } from '#config/database.config.js';
 import { criaConexaoDB } from './connection.factory.js';
 
 const conexao = criaConexaoDB(databaseConfig);
