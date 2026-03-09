@@ -14,6 +14,19 @@ export class AutoresController {
     }
   }
 
+  async buscarAutorPorId(req, res) {
+    const { id } = req.params;
+    try {
+      const resultado = await Autor.pegarPeloId(id);
+      if (!resultado) {
+        return res.status(404).json({ message: 'Autor não encontrado' });
+      }
+      res.status(200).send(resultado);
+    } catch (err) {
+      res.status(500).json(err.message);
+    }
+  }
+
   async cadastrarAutor(req, res) {
     const { body } = req;
     const autor = new Autor(body);
