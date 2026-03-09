@@ -23,21 +23,16 @@ class Autor {
   }
 
   async criar() {
-    return this.db('autores')
-      .insert(this)
-      .then((registroCriado) =>
-        this.db('autores').where('id', registroCriado[0]),
-      )
-      .then((registroSelecionado) => new Autor(registroSelecionado[0]));
+    return Autor.db('autores').insert(this, '*');
   }
 
   async atualizar(id) {
     // o update retorna a quantidade de rows atualizados e não o objeto do registro atualizado
-    await this.db('autores')
+    await Autor.db('autores')
       .where({ id })
       .update({ ...this, updated_at: new Date().toISOString() });
 
-    return this.db.select('*').from('autores').where({ id });
+    return Autor.db.select('*').from('autores').where({ id });
   }
 
   static async excluir(id) {

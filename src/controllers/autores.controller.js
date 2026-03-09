@@ -9,4 +9,17 @@ export class AutoresController {
     const resulado = await Autor.pegarAutores();
     res.status(200).send(resulado);
   }
+
+  async cadastrarAutor(req, res) {
+    const { body } = req;
+    const autor = new Autor(body);
+    try {
+      const resposta = await autor.salvar(autor);
+      return res
+        .status(201)
+        .json({ message: 'autor criado', content: resposta });
+    } catch (err) {
+      return res.status(500).json(err.message);
+    }
+  }
 }

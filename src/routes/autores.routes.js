@@ -6,5 +6,6 @@ const router = Router();
 const autoresController = new AutoresController(db);
 
 router.get('/autores', autoresController.listarAutores);
+router.post('/autores', autoresController.cadastrarAutor);
 
 export default router;
