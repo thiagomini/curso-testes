@@ -6,8 +6,12 @@ export class AutoresController {
   }
 
   async listarAutores(req, res) {
-    const resulado = await Autor.pegarAutores();
-    res.status(200).send(resulado);
+    try {
+      const resulado = await Autor.pegarAutores();
+      res.status(200).send(resulado);
+    } catch (err) {
+      res.status(500).json(err.message);
+    }
   }
 
   async cadastrarAutor(req, res) {
