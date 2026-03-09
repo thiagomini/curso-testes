@@ -1,5 +1,5 @@
 import { databaseConfig } from './config/database.config.js';
-import { criaConexaoDB } from './db/client.factory.js';
+import { criaConexaoDB } from './db/connection.factory.js';
 import Autor from './models/autor.js';
 
 using conexao = criaConexaoDB(databaseConfig);
