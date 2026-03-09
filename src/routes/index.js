@@ -1,4 +1,5 @@
 import autoresRoutes from './autores.routes.js';
+import editorasRoutes from './editoras.routes.js';
 
 export function routes(app) {
   app.route('/').get((_req, res) => {
@@ -6,4 +7,5 @@ export function routes(app) {
   });
 
   app.use(autoresRoutes);
+  app.use(editorasRoutes);
 }

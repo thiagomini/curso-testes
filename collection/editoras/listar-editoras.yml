@@ -1,11 +1,11 @@
 info:
-  name: listar-autores
+  name: listar-editoras
   type: http
   seq: 1
 
 http:
   method: GET
-  url: "{{baseUrl}}/autores"
+  url: "{{baseUrl}}/editoras"
   auth: inherit
 
 runtime:

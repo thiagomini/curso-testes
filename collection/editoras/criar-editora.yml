@@ -1,17 +1,18 @@
 info:
-  name: criar-autor
+  name: criar-editora
   type: http
   seq: 2
 
 http:
   method: POST
-  url: "{{baseUrl}}/autores"
+  url: "{{baseUrl}}/editoras"
   body:
     type: json
     data: |-
       {
-        "nome": "H.P. Lovecraft",
-        "nacionalidade": "Ingles"
+        "nome": "Companhia das Letras",
+        "cidade": "São Paulo",
+        "email": "contato@companhiadasletras.com.br"
       }
   auth: inherit
 
