@@ -36,6 +36,7 @@ export class AutoresController {
         .status(201)
         .json({ message: 'autor criado', content: resposta });
     } catch (err) {
+      console.error(err);
       return res.status(500).json(err.message);
     }
   }
