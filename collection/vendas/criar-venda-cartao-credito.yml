@@ -1,0 +1,29 @@
+info:
+  name: criar-venda-cartao-credito
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: '{{baseUrl}}/vendas'
+  body:
+    type: json
+    data: |-
+      {
+        "idLivro": 1,
+        "valor": 100,
+        "modoPagamento": "CARTAO_CREDITO"
+      }
+  auth: inherit
+
+runtime:
+  assertions:
+    - expression: res.status
+      operator: eq
+      value: '201'
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
