@@ -1,55 +1,29 @@
 import test, { describe } from 'node:test';
 import assert from 'node:assert/strict';
 import { calcularValorVenda } from '#domain/calcular-valor-venda.js';
+import '../e2e/test.each.js';
 
 describe('Calcular valor venda', () => {
-  test('Aplica taxa de 5% para CARTAO_CREDITO', () => {
-    const valorBase = 100;
-    const tipoPagamento = 'CARTAO_CREDITO';
+  test.each([
+    { tipoPagamento: 'CARTAO_CREDITO', valorEsperado: 105 },
+    { tipoPagamento: 'CARTAO_DEBITO', valorEsperado: 102 },
+    { tipoPagamento: 'PIX', valorEsperado: 95 },
+    { tipoPagamento: 'BOLETO', valorEsperado: 100 },
+    { tipoPagamento: 'DINHEIRO', valorEsperado: 100 },
+  ])(
+    'Calcula valor para $tipoPagamento',
+    ({ tipoPagamento, valorEsperado }) => {
+      assert.equal(calcularValorVenda(100, tipoPagamento), valorEsperado);
+    },
+  );
 
-    const valorCalculado = calcularValorVenda(valorBase, tipoPagamento);
-
-    assert.equal(valorCalculado, 105);
-  });
-  test('Aplica taxa de 2% para CARTAO_DEBITO', () => {
-    const valorBase = 100;
-    const tipoPagamento = 'CARTAO_DEBITO';
-
-    const valorCalculado = calcularValorVenda(valorBase, tipoPagamento);
-
-    assert.equal(valorCalculado, 102);
-  });
-  test('Aplica desconto de 5% para PIX', () => {
-    const valorBase = 100;
-    const tipoPagamento = 'PIX';
-
-    const valorCalculado = calcularValorVenda(valorBase, tipoPagamento);
-
-    assert.equal(valorCalculado, 95);
-  });
-  test('Não aplica taxa para BOLETO', () => {
-    const valorBase = 100;
-    const tipoPagamento = 'BOLETO';
-
-    const valorCalculado = calcularValorVenda(valorBase, tipoPagamento);
-
-    assert.equal(valorCalculado, 100);
-  });
-  test('Não aplica taxa para DINHEIRO', () => {
-    const valorBase = 100;
-    const tipoPagamento = 'DINHEIRO';
-
-    const valorCalculado = calcularValorVenda(valorBase, tipoPagamento);
-
-    assert.equal(valorCalculado, 100);
-  });
-  test('Tipo de pagamento inválido', () => {
-    const valorBase = 100;
-    const tipoPagamento = 'PAYPAL';
-
-    assert.throws(
-      () => calcularValorVenda(valorBase, tipoPagamento),
-      new Error('Tipo de pagamento inválido'),
-    );
-  });
+  test.each([{ tipoPagamento: 'PAYPAL' }, { tipoPagamento: 'CRYPTO' }])(
+    'Lança erro para tipo de pagamento inválido: $tipoPagamento',
+    ({ tipoPagamento }) => {
+      assert.throws(
+        () => calcularValorVenda(100, tipoPagamento),
+        new Error('Tipo de pagamento inválido'),
+      );
+    },
+  );
 });
