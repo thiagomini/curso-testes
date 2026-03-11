@@ -8,5 +8,8 @@ export const TAXA_POR_TIPO_PAGAMENTO = {
 
 export function calcularValorVenda(valorBase, tipoPagamento) {
   const multiplicador = TAXA_POR_TIPO_PAGAMENTO[tipoPagamento];
+  if (multiplicador === undefined) {
+    throw new Error('Tipo de pagamento inválido');
+  }
   return Math.round(valorBase * multiplicador);
 }

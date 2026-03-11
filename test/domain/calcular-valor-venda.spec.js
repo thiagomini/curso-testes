@@ -43,4 +43,13 @@ describe('Calcular valor venda', () => {
 
     assert.equal(valorCalculado, 100);
   });
+  test('Tipo de pagamento inválido', () => {
+    const valorBase = 100;
+    const tipoPagamento = 'PAYPAL';
+
+    assert.throws(
+      () => calcularValorVenda(valorBase, tipoPagamento),
+      new Error('Tipo de pagamento inválido'),
+    );
+  });
 });
