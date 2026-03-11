@@ -1,17 +1,8 @@
 import Venda from '#models/venda.js';
-
-const TAXA_POR_TIPO_PAGAMENTO = {
-  CARTAO_CREDITO: 1.05,
-  CARTAO_DEBITO: 1.02,
-  PIX: 0.95,
-  BOLETO: 1,
-  DINHEIRO: 1,
-};
-
-function calcularValorFinal(valorBase, tipoPagamento) {
-  const multiplicador = TAXA_POR_TIPO_PAGAMENTO[tipoPagamento];
-  return Math.round(valorBase * multiplicador);
-}
+import {
+  TAXA_POR_TIPO_PAGAMENTO,
+  calcularValorVenda,
+} from '#domain/calcular-valor-venda.js';
 
 export class VendasController {
   constructor(databaseConnection) {
@@ -40,7 +31,7 @@ export class VendasController {
 
       const venda = new Venda({
         livro_id: livroId,
-        valor: calcularValorFinal(valorBase, tipoPagamento),
+        valor: calcularValorVenda(valorBase, tipoPagamento),
         tipo_pagamento: tipoPagamento,
       });
 
