@@ -24,7 +24,8 @@ class Editora {
   }
 
   async criar() {
-    return Editora.db('editoras').insert(this, '*');
+    const resultado = await Editora.db('editoras').insert(this, '*');
+    return resultado[0];
   }
 
   async atualizar(id) {

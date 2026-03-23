@@ -23,7 +23,8 @@ class Autor {
   }
 
   async criar() {
-    return Autor.db('autores').insert(this, '*');
+    const resultado = await Autor.db('autores').insert(this, '*');
+    return resultado[0];
   }
 
   async atualizar(id) {

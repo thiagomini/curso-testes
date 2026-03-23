@@ -33,7 +33,8 @@ class Livro {
   }
 
   async criar() {
-    return Livro.db('livros').insert(this, '*');
+    const resultado = await Livro.db('livros').insert(this, '*');
+    return resultado[0];
   }
 
   async atualizar(id) {
