@@ -19,8 +19,23 @@ describe('Cadastrar Autor', () => {
       .expect(201)
       .expect((response) => {
         const dadosResposta = response.body.content;
+        assert.strictEqual(typeof dadosResposta.id, 'number');
         assert.strictEqual(dadosResposta.nome, 'H.P. Lovecraft');
         assert.strictEqual(dadosResposta.nacionalidade, 'Ingles');
+      });
+  });
+
+  test('Retorna um erro ao tentar cadastrar um autor com dados inválidos (400).', async () => {
+    await request(app)
+      .post('/autores')
+      .send({
+        nome: '',
+        nacionalidade: '',
+      })
+      .expect(400)
+      .expect((response) => {
+        const codigoErro = response.body.type;
+        assert.strictEqual(codigoErro, 'INVALID_DATA');
       });
   });
 });
