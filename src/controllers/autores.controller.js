@@ -19,7 +19,9 @@ export class AutoresController {
     try {
       const resultado = await Autor.pegarPeloId(id);
       if (!resultado) {
-        return res.status(404).json({ message: 'Autor não encontrado' });
+        return res
+          .status(404)
+          .json({ message: 'Autor não encontrado', type: 'NOT_FOUND' });
       }
       res.status(200).send(resultado);
     } catch (err) {
